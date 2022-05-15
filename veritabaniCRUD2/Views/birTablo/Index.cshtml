@@ -1,0 +1,54 @@
+﻿@model IEnumerable<veritabaniCRUD2.Models.birTablo>
+@{
+    ViewData["Title"] = "Veri CRUD ve Arama işlemleri";
+}
+
+<h1>birTablo Listesi</h1>
+
+@ViewData["mesaj"]
+<form method="get">
+    Arama <input type="text" name="aranan" /> <input type="submit" value="🔍 Ara" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sirala="Id">@Html.DisplayNameFor(model => model.Id)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sirala="isim">@Html.DisplayNameFor(model => model.isim)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sirala="ucret">@Html.DisplayNameFor(model => model.ucret)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ucret)
+                </td>
+                <td>
+                    <a asp-action="Guncelle" asp-route-id="@item.Id">🖋 Güncelle</a> |
+                    <a asp-action="Sil" asp-route-id="@item.Id">❌ Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Ekle">
+    İsim <input type="text" name="isim" /> <br />
+    Ücret <input type="text" name="ucret" /> <br />
+    <input type="submit" value="✔ Ekle" />
+</form>
